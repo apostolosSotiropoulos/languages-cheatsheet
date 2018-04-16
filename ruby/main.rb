@@ -43,7 +43,7 @@ class Vehicle
 
   # instance method
   def start
-    puts "#{@@type} named #{@name} just started trying to #{PURPOSE}."
+    "#{@@type} named #{@name} just started trying to #{PURPOSE}."
   end
 end
 
@@ -76,5 +76,24 @@ end
 some_car = Car.new 'aubi', 4
 puts 'Inheritance?'
 puts '-easy. For instance lets try starting my car: '
-some_car.start
+puts "-#{some_car.start}"
 puts '-and btw this is a 2 doored car' if some_car.two_doored? # won't show
+
+# Multiple Inheritance?
+# Resources:
+# https://ruby-doc.com/docs/ProgrammingRuby/html/tut_modules.html
+module Wheelable
+  def wheels?
+    true
+  end
+end
+
+# multiple inheritance via use of include
+class MotorBike < Vehicle
+  include Wheelable
+end
+
+some_bike = MotorBike.new 'yamada'
+puts 'Multiple inheritance?'
+puts '-is available via mixins. For instance lets check my bike'
+puts "-#{MotorBike.type}, #{some_bike.name}, has wheels" if some_bike.wheels?
