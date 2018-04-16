@@ -4,4 +4,5 @@ My basic cheatsheet for the languages I use. Contains answers for the common que
 - Function Args: Pass by value or by reference?
 - Var Scope?
 - Inheritance?
-- How to include other files, modules?
+- Multiple Inheritance?
+- Composition? how to include other files, modules?
