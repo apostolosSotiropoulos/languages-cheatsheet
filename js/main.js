@@ -35,6 +35,15 @@ function changeObject (x) {
   console.log('-- object value in function call has value : ' + x.member)
 }
 
+function two () {
+  var x0 = 1
+  function f1 () {
+    var x1 = 1
+    return x1 + x0
+  }
+  return f1()
+}
+
 console.log('Scope?')
 console.log('- There are globals and locals. All are globals unless declared in a function.')
 console.log('- Those are called locals and their scope extends in the function and the functions declared in it.')
@@ -43,6 +52,7 @@ console.log('- For instance:')
 console.log('-- object value before function call has value : ' + anObject.member)
 changeObject(anObject)
 console.log('-- object value after function call has value : ' + anObject.member)
+console.log('-- function two returns: ' + two())
 /*
 class Vehicle
   attr_reader :name  defines a class method name for class var name
