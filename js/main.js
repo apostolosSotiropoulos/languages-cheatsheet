@@ -53,60 +53,69 @@ console.log('-- object value before function call has value : ' + anObject.membe
 changeObject(anObject)
 console.log('-- object value after function call has value : ' + anObject.member)
 console.log('-- function two returns: ' + two())
+
 /*
-class Vehicle
-  attr_reader :name  defines a class method name for class var name
-  PURPOSE = 'transfer things and humans'.freeze  constant
-  @@type = 'Vehicle'  class variable
+  Inheritance?
+  Resources:
+  https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes
+  https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance
+*/
 
-   class method
-  def self.type
-    @@type
-  end
+function Person (name, birthYear) {
+  this.birthYear = birthYear
+  this.name = name
+  this.type = 'person'
+}
 
-  def initialize(name)
-     instance variable : every instance can have a different value for it
-    @name = name
-  end
+Person.prototype.greeting = function () {
+  return 'this is a ' + this.type + ' named ' + this.name + ' born in ' + this.birthYear
+}
 
-   instance method
-  def start
-    "#{@@type} named #{@name} just started trying to #{PURPOSE}."
-  end
-end
+Person.prototype.yearsOld = function () {
+  return ((new Date()).getFullYear() - this.birthYear) + ' years old'
+}
 
-some_vehicle = Vehicle.new 'fiab'
-puts 'Scope?'
-puts "-Class variable (i.e @@type = #{Vehicle.type}): Available from the\
- class definition and any sub-classes. Not available from anywhere outside."
-puts "-Instance variable (i.e @name = #{some_vehicle.name}): Available\
- only within a specific object, across all methods in a class instance.\
- Not available directly from class definitions."
-puts '-Global variable ($a_variable): Available everywhere within the script.'
-puts '-Local variable (a_variable): It depends on the scope.'
-puts '-- local variables created in the blocks are not available outside them'
-puts '-- local variables created outside the block are available within them'
+function Teacher (name, birthYear, subject) {
+  Person.call(this, name, birthYear)
+  this.students = []
+  this.subject = subject
+  this.type = 'teacher'
+}
 
- Inheritance?
- Resources:
- https://learnrubythehardway.org/book/ex44.html
-class Car < Vehicle
-  def initialize(name, doors = 2)
-    super name
-    @doors = doors
-  end
+// inheritance implemented through these 2 lines
+Teacher.prototype = Object.create(Person.prototype)
+Teacher.prototype.constructor = Teacher
 
-  def two_doored?
-    @doors == 2
-  end
-end
+Teacher.prototype.showStudents = function () {
+  console.log('-- has students:')
+  for (let i = 0; i < this.students.length; i++) {
+    console.log('--- ' + this.students[i])
+  }
+}
 
-some_car = Car.new 'aubi', 4
-puts 'Inheritance?'
-puts '-easy. For instance lets try starting my car: '
-puts "-#{some_car.start}"
-puts '-and btw this is a 2 doored car' if some_car.two_doored?  won't show
+Teacher.prototype.greeting = function () {
+  return 'this is a ' + this.type + ' named ' + this.name + ' born in ' + this.birthYear + ' teaching ' + this.subject
+}
 
+let apos = new Person('apos', 1987)
+let toli = new Person('toli', 1987)
+let mara = new Teacher('mara', 1986, 'mathematics')
+mara.students.push(apos.name)
+mara.students.push(toli.name)
+
+console.log('Inheritance?')
+console.log('- Vanila JS is not designed for it.')
+console.log('- Functions can be used as constructors.')
+console.log('- Their prototype attr shows which methods are going to be accessible to their instances')
+console.log('- Instances have a __proto__ attr pointing to their prototype')
+console.log('- For instance:')
+console.log('-- ' + apos.greeting())
+console.log('-- ' + toli.greeting())
+console.log('-- ' + mara.greeting())
+console.log('-- ' + mara.name + ' is ' + mara.yearsOld())
+mara.showStudents()
+
+/*
  Multiple Inheritance?
  Resources:
  https://ruby-doc.com/docs/ProgrammingRuby/html/tut_modules.html
