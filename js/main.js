@@ -135,38 +135,14 @@ console.log('- is available via mixins. For instance lets check the hobbies of m
 console.log('--' + mara.myHobbies())
 
 /*
- Composition? how to include other files, modules?
- Resources:
- https://stackoverflow.com/questions/318144/what-is-the-difference-between-include-and-require-in-ruby
-
- require is NEEDED for include
-require "#{Dir.pwd}/ruby/reusables/printer.rb"
-
- class multiprinter to check how to call module Printer methods
-class Multiprinter
-  include Printer
-
-  def test_printer
-    puts "----#{instance_printer}"
-    puts "----#{Printer.class_printer}"
-  end
-end
-
-puts 'Composition? how to include other files, modules?'
-puts '-there are 3 ways here. Include, require and load.'
-
-puts "--Include: The include method takes all the methods from another module\
- and includes them into the current module. This is a language-level thing as\
- opposed to a file-level thing as with require. The include method is the\
- primary way to 'extend' classes with other modules (mix-ins). Let's check my\
- printer for instance:"
-Multiprinter.new.test_printer
-
-puts "--Require: runs another file. It also tracks history and does not\
- require the same file twice. Let's check my printer again:"
-puts "----#{Printer::class_printer}"
-puts "----#{Printer.class_printer}"
-
-puts '--Load: runs another file every time. No history tracking.'
-
+  Composition? how to include other files, modules?
+  Resources:
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import
+  https://webpack.js.org/
 */
+
+console.log('Composition? how to include other files, modules?')
+console.log('- right now not easily with vanilla js.')
+console.log('- one way would be, by using webpack')
+console.log('- nevertheless, some browsers already support import / export , ie:')
+console.log("-- import { printer } from ' / reusables / printer.js'")
