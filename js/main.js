@@ -116,27 +116,25 @@ console.log('-- ' + mara.name + ' is ' + mara.yearsOld())
 mara.showStudents()
 
 /*
- Multiple Inheritance?
- Resources:
- https://ruby-doc.com/docs/ProgrammingRuby/html/tut_modules.html
+  Multiple Inheritance?
+  Resources:
+  https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/
+*/
 
- this is a module namespacing the methods defined in it
-module Wheelable
-  def wheels?
-    true
-  end
-end
+function ParagliderHobbyist () {
+  this.myHobbies = function () {
+    return this.name + ' is a paraglide pilot'
+  }
+}
 
- multiple inheritance via use of include and modules
-class MotorBike < Vehicle
-  include Wheelable
-end
+// this way all teachers will be paraglide pilots
+ParagliderHobbyist.call(Teacher.prototype)
 
-some_bike = MotorBike.new 'yamada'
-puts 'Multiple inheritance?'
-puts '-is available via mixins. For instance lets check my bike'
-puts "-#{MotorBike.type}, #{some_bike.name}, has wheels" if some_bike.wheels?
+console.log('Multiple inheritance?')
+console.log('- is available via mixins. For instance lets check the hobbies of mara:')
+console.log('--' + mara.myHobbies())
 
+/*
  Composition? how to include other files, modules?
  Resources:
  https://stackoverflow.com/questions/318144/what-is-the-difference-between-include-and-require-in-ruby
