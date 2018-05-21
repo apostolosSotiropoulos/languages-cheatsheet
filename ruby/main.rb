@@ -99,6 +99,10 @@ some_bike = MotorBike.new 'yamada'
 puts 'Multiple inheritance?'
 puts '-is available via mixins. For instance lets check my bike'
 puts "-#{MotorBike.type}, #{some_bike.name}, has wheels" if some_bike.wheels?
+puts '-instances can also inherit multiple classes by using extend method to modules. ie:'
+module Rideable; def ride; 'flows in the street'; end; end
+some_bike.extend(Rideable)
+puts "-my bike also #{some_bike.ride}"
 
 # Composition? how to include other files, modules?
 # Resources:
